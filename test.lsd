@@ -1,0 +1,19 @@
+String root = "http://docker:8080/service_manager/invoker"
+String mascUrl = "$root/docker:masc.text_2.0.0"
+String tokenizerUrl = "$root/docker:gate.tokenizer_2.0.0"
+String username = "tester"
+String password = "tester"
+
+def masc = new DataSourceClient(mascUrl, username, password)
+def tokenizer = new ServiceClient(tokenizerUrl, username, password)
+
+println "Fetching data."
+String json  = masc.get("MASC3-0204")
+
+println "Running the tokenizer."
+json = tokenizer.execute(json)
+
+// Print the output
+Data data = Serializer.parse(json, Data)
+println data.discriminator
+println data.payload

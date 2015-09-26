@@ -1,2 +1,3 @@
-# docker-service-manager
-Docker image with the Lappsgrid Service Manager.
+# Docker Service Manager
+
+Language Application Grid Service Manager in a Docker image.
