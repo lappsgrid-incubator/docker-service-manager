@@ -1,0 +1,26 @@
+<Context reloadable='true' displayName='LAPPS : Docker'>
+  <Resource name='jdbc/langrid' auth='Container' type='javax.sql.DataSource' maxActive='100' maxIdle='50' maxWait='10000' username='langrid' password='langrid' driverClassName='org.postgresql.Driver' url='jdbc:postgresql:langrid' />
+  <Parameter name='langrid.serviceManagerCopyright' value='Copyright 2012-2015' />
+  <Parameter name='langrid.activeBpelServicesUrl' value='http://vassar:8081/active-bpel/services' />
+  <Parameter name='langrid.activeBpelAppAuthKey' value='asdkjbweposd' />
+  <Parameter name='langrid.maxCallNest' value='16' />
+  <Parameter name='langrid.atomicServiceReadTimeout' value='30000' />
+  <Parameter name='langrid.compositeServiceReadTimeout' value='30000' />
+  <Parameter name='langrid.node.gridId' value='vassar' />
+  <Parameter name='langrid.node.nodeId' value='vassar1' />
+  <Parameter name='langrid.node.name' value='Vassar' />
+  <Parameter name='langrid.node.url' value='http://vassar:8080/service_manager' />
+  <Parameter name='langrid.node.os' value='Ubuntu 12.04.1 LTS' />
+  <Parameter name='langrid.node.cpu' value='4x8 2.6Ghz' />
+  <Parameter name='langrid.node.memory' value='64GB' />
+  <Parameter name='langrid.node.specialNotes' value='None.' />
+  <Parameter name='langrid.operator.userId' value='operator' />
+  <Parameter name='langrid.operator.initialPassword' value='operator' />
+  <Parameter name='langrid.operator.organization' value='Language Application Grid' />
+  <Parameter name='langrid.operator.responsiblePerson' value='Keith Suderman' />
+  <Parameter name='langrid.operator.emailAddress' value='suderman@anc.org' />
+  <Parameter name='langrid.operator.homepageUrl' value='http://www.anc.org' />
+  <Parameter name='langrid.operator.address' value='New York' />
+  <Parameter name='appAuth.simpleApp.authIps' value='127.0.0.1' />
+  <Parameter name='appAuth.simpleApp.authKey' value='cse=24nrkasjd' />
+</Context>

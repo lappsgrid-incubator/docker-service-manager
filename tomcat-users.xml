@@ -1,0 +1,4 @@
+<tomcat-users>
+  <role rolename='serviceGridAdmin' />
+  <user username='admin' password='admin' roles='manager-gui,admin-gui,manager-status,serviceGridAdmin' />
+</tomcat-users>

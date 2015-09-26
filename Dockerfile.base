@@ -1,0 +1,51 @@
+# A Lappsgrid Service Manager with the GATE and Stanford services installed.
+
+FROM ksuderman/ubuntu
+
+MAINTAINER Keith Suderman, suderman@cs.vassar.edu
+
+#RUN echo "192.168.99.100		docker" >> /etc/hosts
+
+# Install tomcat to /usr/share
+ADD ./packages/tomcat.tgz /usr/share/tomcat
+ADD ./tomcat-startup.sh /etc/init.d/tomcat
+ADD ./tomcat-users.xml /usr/share/tomcat/service-manager/conf/tomcat-users.xml
+ADD ./service_manager.xml /usr/share/tomcat/service-manager/conf/Catalina/localhost/service_manager.xml
+RUN chmod ug+x /etc/init.d/tomcat
+# Create the log directories
+RUN mkdir /usr/share/tomcat/service-manager/logs && \
+    mkdir /usr/share/tomcat/active-bpel/logs 
+
+# Install LSD and LDDL executables to /usr/bin
+ADD ./packages/lsd.tgz /usr/bin
+ADD ./packages/lddl.tgz /usr/bin
+RUN chmod a+x /usr/bin/lsd && \
+    chmod a+x /usr/bin/lddl
+
+# Add the startup script to be run when the container starts.
+ADD ./startup.sh /usr/bin/startup
+RUN chmod ug+x /usr/bin/startup 
+
+# Create the database for the Service Manager.
+ADD ./create_storedproc.sql /tmp/create_storedproc.sql
+USER postgres
+RUN service postgresql start && \
+	until pg_isready ; do echo "Waiting..." ; sleep 2; done && \
+    createuser -S -D -R langrid && \
+    psql --command "ALTER USER langrid WITH PASSWORD 'langrid'" && \
+    createdb langrid -O langrid -E "UTF-8" && \
+    psql langrid < /tmp/create_storedproc.sql && \
+    psql langrid -c "ALTER FUNCTION \"AccessStat.increment\"(character varying, character varying, character varying, character varying, character varying, timestamp without time zone, timestamp without time zone, integer, timestamp without time zone, integer, timestamp without time zone, integer, integer, integer, integer) OWNER TO langrid"
+
+USER root	
+
+# Create the tomcat account.
+RUN /usr/sbin/useradd -d /usr/share/tomcat -c "Apache Tomcat" -m -s /bin/nologin tomcat
+RUN chown -R tomcat:tomcat /usr/share/tomcat
+
+
+# Call our startup script when the container starts.
+CMD [ "/usr/bin/startup" ]
+
+
+

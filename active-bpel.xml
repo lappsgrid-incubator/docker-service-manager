@@ -1,0 +1,4 @@
+<Context reloadable='true' displayName='ActiveBPEL Process Manager' path='/active-bpel'>
+  <Parameter name='fromCoreNode.appAuth.authIps' value='127.0.0.1' />
+  <Parameter name='fromCoreNode.appAuth.authKey' value='asdkjbweposd' />
+</Context>
