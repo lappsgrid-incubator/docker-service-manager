@@ -4,15 +4,14 @@ FROM ksuderman/ubuntu
 
 MAINTAINER Keith Suderman, suderman@cs.vassar.edu
 
-#RUN echo "192.168.99.100		docker" >> /etc/hosts
-
 # Install tomcat to /usr/share
 ADD ./packages/tomcat.tgz /usr/share/tomcat
 ADD ./tomcat-startup.sh /etc/init.d/tomcat
 ADD ./tomcat-users.xml /usr/share/tomcat/service-manager/conf/tomcat-users.xml
 ADD ./service_manager.xml /usr/share/tomcat/service-manager/conf/Catalina/localhost/service_manager.xml
 RUN chmod ug+x /etc/init.d/tomcat
-# Create the log directories
+# Create the log directories. These are not in the tgz file (since they were empty) and
+# Tomcat chokes if they do not exist.
 RUN mkdir /usr/share/tomcat/service-manager/logs && \
     mkdir /usr/share/tomcat/active-bpel/logs 
 
@@ -39,7 +38,8 @@ RUN service postgresql start && \
 
 USER root	
 
-# Create the tomcat account.
+# Create the tomcat account.  It is safe to ignore the warning from useradd that the
+# user's HOME directory already exists.
 RUN /usr/sbin/useradd -d /usr/share/tomcat -c "Apache Tomcat" -m -s /bin/nologin tomcat
 RUN chown -R tomcat:tomcat /usr/share/tomcat
 
