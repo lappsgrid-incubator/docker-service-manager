@@ -13,6 +13,7 @@ service tomcat start
 if [ -d /etc/lddl ] ; then
 	# Watch the log file for the startup complete message from Tomcat
 	tail -f $LOG | grep "INFO: Server startup in" | read -t 300 dummy_var
+	if [ $? -eq 0 ] ; then
 		cd /etc/lddl
 		lddl Vassar.lddl -server=$SERVER
 	else
