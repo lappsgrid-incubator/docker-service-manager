@@ -15,4 +15,4 @@ ADD ./packages/lddl-scripts.tgz /etc/lddl
 ADD ./service_manager-vassar.xml /usr/share/tomcat/service-manager/conf/Catalina/localhost/service_manager.xml
 ADD ./startup-vassar.sh /usr/bin/startup
 
-ENTRYPOINT ["/usr/bin/startup"]
+CMD ["/usr/bin/startup"]
