@@ -1,5 +1,5 @@
 DOCKER=/usr/local/bin/docker
-IMAGE=ksuderman/service-manager
+IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
 
 help:
@@ -32,7 +32,7 @@ help:
 	@echo
 	
 base:
-	$(DOCKER) build -f Dockerfile.base -t $(IMAGE):base .
+	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
 	
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
