@@ -31,7 +31,7 @@ help:
 	@echo "        Prints these usage instructions."
 	@echo
 	
-base:
+latest:
 	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
 	
 vassar:
