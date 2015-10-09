@@ -1,4 +1,4 @@
-DOCKER=/usr/local/bin/docker
+DOCKER=/usr/bin/docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
 
@@ -30,21 +30,21 @@ help:
 	@echo "    help"
 	@echo "        Prints these usage instructions."
 	@echo
-	
+
 base:
 	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
-	
+
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
-	
+
 brandeis:
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
-	
+
 all:
 	$(DOCKER) build -f Dockerfile.base -t $(IMAGE):base .
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
-	
+
 run:
 	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
 
@@ -55,7 +55,7 @@ upload:
 	gzip $(TARFILE)
 	@echo "Uploading the gz file."
 	scp -P 22022 $(TARFILE).gz suderman@anc.org:/home/www/anc/downloads/docker
-	
+
 push:
 	$(DOCKER) push $(IMAGE):all
 
