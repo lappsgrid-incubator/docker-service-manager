@@ -1,4 +1,4 @@
-DOCKER=/usr/bin/docker
+DOCKER=/usr/local/bin/docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
 
