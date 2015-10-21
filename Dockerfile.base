@@ -18,7 +18,7 @@ RUN mkdir /usr/share/tomcat/service-manager/logs && \
     mkdir /usr/share/tomcat/active-bpel/logs 
 
 # Install LSD and LDDL executables to /usr/bin
-ADD ./packages/lddl-scripts.tgz /etc/lddl
+#ADD ./packages/lddl-scripts.tgz /etc/lddl
 ADD ./packages/lsd.tgz /usr/bin
 ADD ./packages/lddl.tgz /usr/bin
 RUN chmod a+x /usr/bin/lsd && \

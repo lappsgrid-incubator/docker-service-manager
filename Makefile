@@ -1,4 +1,4 @@
-DOCKER=/usr/bin/docker
+DOCKER=/usr/local/bin/docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
 
@@ -58,5 +58,5 @@ upload:
 	scp -P 22022 $(TARFILE).gz suderman@anc.org:/home/www/anc/downloads/docker
 
 push:
-	$(DOCKER) push $(IMAGE):all
+	$(DOCKER) push $(IMAGE):vassar
 

@@ -13,7 +13,21 @@ fi
 cd packages
 
 case "$1" in
-	download|update)
+	download)
+		for package in $PACKAGE_LIST ; do
+			wget $SERVER/$package.tgz
+		done
+		;;
+	update)
+		for package in $PACKAGE_LIST ; do
+			if [ -e "$package.tgz" ] ; then
+				echo "Skipping $package"
+			else
+				wget $SERVER/$package.tgz
+			fi
+		done
+		;;
+	link)
 		for package in $PACKAGE_LIST ; do
 			if [ -e "$package.tgz" ] ; then
 				echo "Skipping $package"

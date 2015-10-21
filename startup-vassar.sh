@@ -2,7 +2,8 @@
 #set -e
 
 LOG=/usr/share/tomcat/service-manager/logs/catalina.out
-SERVER=http://vassar:8080
+VASSAR=http://vassar:8080
+BRANDEIS=http://brandeis:8080
 
 service postgresql start
 until pg_isready &>/dev/null ; do
@@ -32,7 +33,8 @@ done
 
 echo "Initializing the service manager."
 cd /etc/lddl
-lddl Vassar.lddl -server=$SERVER
+lddl Vassar.lddl -server=$VASSAR
+lddl Brandeis.lddl -server=$BRANDEIS
 
 tail -f $LOG
 
