@@ -7,7 +7,9 @@ ENV TERM=xterm
 
 USER root
 
-ADD ./packages/lddl-scripts.tgz /etc/lddl
+#ADD ./packages/lddl-scripts.tgz /etc/lddl
+RUN apt-get update && apt-get install -y git
+RUN git clone https://github.com/ksuderman/lddl-scripts.git /etc/lddl
 
 ADD ./service_manager-vassar.xml /usr/share/tomcat/service-manager/conf/Catalina/localhost/service_manager.xml
 ADD ./startup-vassar.sh /usr/bin/startup

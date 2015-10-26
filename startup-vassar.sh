@@ -34,6 +34,7 @@ done
 echo "Initializing the service manager."
 cd /etc/lddl
 lddl Vassar.lddl -server=$VASSAR
+lddl Update.lddl -version=2.1.0 -server=$VASSAR vassar/Datasources
 lddl Brandeis.lddl -server=$BRANDEIS
 
 tail -f $LOG
