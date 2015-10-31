@@ -6,6 +6,9 @@ TARFILE=service-manager-vassar.tar
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
 
+no-cache:
+	$(DOCKER) build --no-cache -f Dockerfile.vassar -t $(IMAGE):vassar .
+
 brandeis:
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
 
@@ -19,6 +22,10 @@ all:
 
 run:
 	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
+
+tag:
+	if [ -n "$(TAG)" ] ; then $(DOCKER) $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
+	
 
 upload:
 	@echo "Saving container to a tar file."
@@ -37,6 +44,8 @@ help:
 	@echo
 	@echo "    vassar (default)"
 	@echo "        Extends base with the GATE and Stanford services."
+	@echo "    no-cache"
+	@echo "        Builds the vassar image ignoring all cached layers."
 	@echo "    base"
 	@echo "        Builds a basic service manager with no services."
 	@echo "    brandeis"
@@ -49,6 +58,9 @@ help:
 	@echo "        Builds both service_manager images."
 	@echo "    all"
 	@echo "        Builds both images and then pushes them."
+	@echo "    tag TAG=<tag>"
+	@echo "        Tags the vassar image on hub.docker.com. The tag"
+	@echo "        to use must be specified on the command line."
 	@echo "    help"
 	@echo "        Prints these usage instructions."
 	@echo
