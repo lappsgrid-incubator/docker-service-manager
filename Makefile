@@ -24,7 +24,7 @@ run:
 	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
 
 tag:
-	if [ -n "$(TAG)" ] ; then $(DOCKER) $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
+	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
 	
 
 upload:
