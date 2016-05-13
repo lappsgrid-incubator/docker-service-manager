@@ -1,59 +1,34 @@
 DOCKER=/usr/local/bin/docker
 IMAGE=lappsgrid/service-manager
-TARFILE=service-manager-vassar.tar
+VERSION=1.0.0
 
-
-vassar:
-	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
+manager:
+	$(DOCKER) build -t $(IMAGE):$(VERSION) .
 
 no-cache:
-	$(DOCKER) build --no-cache -f Dockerfile.vassar -t $(IMAGE):vassar .
-
-brandeis:
-	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
-
-latest:
-	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
-
-all:
-	$(DOCKER) build -f Dockerfile.base -t $(IMAGE):base .
-	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
-	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
+	$(DOCKER) build --no-cache -t $(IMAGE):$(VERSION) .
 
 run:
-	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
+	$(DOCKER) run -d --name manager -p 8080:8080 $(IMAGE):$(VERSION)
 
 tag:
-	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
+	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):$(VERSION) $(IMAGE):$(TAG) ; fi
 	
-
-upload:
-	@echo "Saving container to a tar file."
-	$(DOCKER) save -o $(TARFILE) $(IMAGE):vassar
-	@echo "GZipping the tar file."
-	gzip $(TARFILE)
-	@echo "Uploading the gz file."
-	scp -P 22022 $(TARFILE).gz suderman@anc.org:/home/www/anc/downloads/docker
-
 push:
-	$(DOCKER) push $(IMAGE):vassar
+	$(DOCKER) push $(IMAGE):$(VERSION)
 
 help:
 	@echo
 	@echo "    GOALS"
 	@echo
-	@echo "    vassar (default)"
+	@echo "    manager (default)"
 	@echo "        Extends base with the GATE and Stanford services."
 	@echo "    no-cache"
 	@echo "        Builds the vassar image ignoring all cached layers."
-	@echo "    base"
-	@echo "        Builds a basic service manager with no services."
-	@echo "    brandeis"
-	@echo "        Extends base with the services from Brandies (OpenNLP et al)."
 	@echo "    run"
-	@echo "        Runs the $(IMAGE):vassar image"
+	@echo "        Runs the $(IMAGE):$(VERSION) image"
 	@echo "    push"
-	@echo "        Pushes $(IMAGE) to the Docker Hub."
+	@echo "        Pushes $(IMAGE):$(VERSION) to the Docker Hub."
 	@echo "    both"
 	@echo "        Builds both service_manager images."
 	@echo "    all"

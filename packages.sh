@@ -4,7 +4,7 @@
 # to download the packages.
 
 SERVER=http://www.anc.org/downloads/docker
-PACKAGE_LIST="lsd lddl tomcat"
+PACKAGE_LIST="lsd-latest lddl tomcat"
 
 if [ ! -d packages ] ; then
 	mkdir packages
