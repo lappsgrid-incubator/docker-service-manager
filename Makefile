@@ -1,10 +1,14 @@
-DOCKER=/usr/local/bin/docker
+DOCKER=docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
+TAG=discovery
 
 # This is actually the main Service Manager Dockerfile, every thing is
 # just badly named.  This target creates the image for the service manager
 # and registers both the Vassar and Brandeis services.
+latest:
+	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE) .
+
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
 
@@ -14,7 +18,7 @@ no-cache:
 brandeis:
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
 
-latest:
+base:
 	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
 
 all:
@@ -22,12 +26,17 @@ all:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
 
+push:
+	$(DOCKER) push $(IMAGE)
+	
 run:
 	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
 
 tag:
-	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE):vassar $(IMAGE):$(TAG) ; fi
+	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE) $(IMAGE):$(TAG) ; fi
 	
+push:
+	$(DOCKER) 
 
 upload:
 	@echo "Saving container to a tar file."
@@ -44,7 +53,10 @@ help:
 	@echo
 	@echo "    GOALS"
 	@echo
-	@echo "    vassar (default)"
+	@echo "    latest (default)"
+	@echo "        Builds the service manager image with Vassar and"
+	@echo "        Brandeis services registered."
+	@echo "    vassar"
 	@echo "        Extends base with the GATE and Stanford services."
 	@echo "    no-cache"
 	@echo "        Builds the vassar image ignoring all cached layers."
