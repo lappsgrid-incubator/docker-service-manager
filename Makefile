@@ -28,13 +28,13 @@ all:
 
 push:
 	$(DOCKER) push $(IMAGE)
-	
+
 run:
-	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
+	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE)
 
 tag:
 	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE) $(IMAGE):$(TAG) ; fi
-	
+
 push:
 	$(DOCKER) 
 
