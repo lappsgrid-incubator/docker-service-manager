@@ -2,7 +2,9 @@ DOCKER=/usr/local/bin/docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
 
-
+# This is actually the main Service Manager Dockerfile, every thing is
+# just badly named.  This target creates the image for the service manager
+# and registers both the Vassar and Brandeis services.
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
 
