@@ -35,9 +35,6 @@ run:
 tag:
 	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE) $(IMAGE):$(TAG) ; fi
 	
-push:
-	$(DOCKER) 
-
 upload:
 	@echo "Saving container to a tar file."
 	$(DOCKER) save -o $(TARFILE) $(IMAGE):vassar
@@ -45,9 +42,6 @@ upload:
 	gzip $(TARFILE)
 	@echo "Uploading the gz file."
 	scp -P 22022 $(TARFILE).gz suderman@anc.org:/home/www/anc/downloads/docker
-
-push:
-	$(DOCKER) push $(IMAGE):vassar
 
 help:
 	@echo
