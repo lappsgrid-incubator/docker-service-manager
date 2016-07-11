@@ -7,7 +7,7 @@ TAG=discovery
 # just badly named.  This target creates the image for the service manager
 # and registers both the Vassar and Brandeis services.
 latest:
-	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE) .
+	$(DOCKER) build -f Dockerfile.discovery -t $(IMAGE) .
 
 vassar:
 	$(DOCKER) build -f Dockerfile.vassar -t $(IMAGE):vassar .
