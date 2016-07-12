@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y git
 RUN git clone https://github.com/ksuderman/lddl-scripts.git /etc/lddl
 
 ADD ./service_manager-discovery.xml /usr/share/tomcat/service-manager/conf/Catalina/localhost/service_manager.xml
-ADD ./startup-disovery.sh /usr/bin/startup
+ADD ./startup-discovery.sh /usr/bin/startup
 ADD ./shutdown.sh /usr/bin/shutdown
 ADD ./tail-log.sh /usr/bin/taillog
 RUN chmod ug+x /usr/bin/taillog && \
