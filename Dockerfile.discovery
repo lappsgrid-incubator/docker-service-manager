@@ -1,7 +1,7 @@
 # This image extends service-manager:base and adds the Lapps services running
 # on the Vassar node.
 
-FROM lappsgrid/service-manager
+FROM lappsgrid/service-manager:base
 
 ENV TERM=xterm
 

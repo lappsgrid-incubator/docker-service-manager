@@ -19,7 +19,7 @@ brandeis:
 	$(DOCKER) build -f Dockerfile.brandeis -t $(IMAGE):brandeis .
 
 base:
-	$(DOCKER) build -f Dockerfile.base -t $(IMAGE) .
+	$(DOCKER) build -f Dockerfile.base -t $(IMAGE):base .
 
 all:
 	$(DOCKER) build -f Dockerfile.base -t $(IMAGE):base .
@@ -28,6 +28,9 @@ all:
 
 push:
 	$(DOCKER) push $(IMAGE)
+	
+push-base:
+	$(DOCKER) push $(IMAGE):base
 	
 run:
 	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
