@@ -33,11 +33,11 @@ push-base:
 	$(DOCKER) push $(IMAGE):base
 	
 run:
-	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE):vassar
+	$(DOCKER) run -d --name vassar -p 8080:8080 $(IMAGE)
 
 tag:
 	if [ -n "$(TAG)" ] ; then $(DOCKER) tag $(IMAGE) $(IMAGE):$(TAG) ; fi
-	
+
 upload:
 	@echo "Saving container to a tar file."
 	$(DOCKER) save -o $(TARFILE) $(IMAGE):vassar
