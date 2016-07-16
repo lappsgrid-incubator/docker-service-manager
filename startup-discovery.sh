@@ -36,7 +36,7 @@ cd /etc/lddl
 git fetch origin
 git checkout docker
 lddl Vassar.lddl -server=$VASSAR
-lddl Update.lddl -server=$VASSAR -version=2.2.0 vassar/Datasources
+#lddl Update.lddl -server=$VASSAR -version=2.2.0 vassar/Datasources
 lddl Update.lddl -server=$BRANDEIS -version=2.0.1 brandeis/ServicesOpenNLP.lddl
 lddl Update.lddl -server=$BRANDEIS -version=2.0.1 brandeis/ServicesStanford.lddl
 lddl Update.lddl TempUser.lddl
