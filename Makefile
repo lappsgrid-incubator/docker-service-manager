@@ -1,7 +1,6 @@
 DOCKER=docker
 IMAGE=lappsgrid/service-manager
 TARFILE=service-manager-vassar.tar
-TAG=discovery
 
 # This is actually the main Service Manager Dockerfile, every thing is
 # just badly named.  This target creates the image for the service manager
